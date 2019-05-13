@@ -34,7 +34,7 @@ int search(struct Array *array, int value) {
 	for(int idx=0;idx < array->used; idx++) {
 		if(array->base[idx] == value)
 			return idx;
-		if(array->base[idx] > elem) //array is sorted,if index 0 is bigger than pattern,no need to continue. 
+		if(array->base[idx] > value) //array is sorted,if index 0 is bigger than pattern,no need to continue. 
 			return -1;
 	}
 	
@@ -58,7 +58,7 @@ void dump(struct Array *array) {
 	}
 	printf("used:%d\n",array->used);
 }
-
+/*
 int main(int argc, char** argv) {
 	
 	struct Array m_array = { 10,0,NULL};
@@ -79,4 +79,4 @@ int main(int argc, char** argv) {
 	printf("search 1:  %d\n",search(&m_array,1));
 	printf("search 10: %d\n",search(&m_array,10));
 	return 0;
-}
+}*/
