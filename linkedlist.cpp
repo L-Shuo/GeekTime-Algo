@@ -91,7 +91,7 @@ void del_backwards(struct list_head  *head, int n) {
 	second->next = second->next->next;
 }
 
-void merge_sorted_list(struct list_head *h1, struct list_head *h2) {
+void merge_sorted_list(struct list_head *new_head, struct list_head *h1, struct list_head *h2) {
 
 }
 
@@ -164,5 +164,30 @@ int main(int argc, char** argv) {
 	del_backwards(&head,3);
 	dump(&head);
 
+	printf("-------------merge sorted list----------\n");
+	struct list_head head1 = {NULL};
+	struct list_head head2 = {NULL};
+
+	struct list_node nodes1[3];
+	struct list_node nodes2[4];
+
+	for(int i=0;i<3;i++) {
+		nodes1[i].val = i;
+		nodes1[i].next = NULL;
+		insert_head(&head1,&nodes1[i]);
+	}
+	reverse(&head1);
+	dump(&head1);
+	for(int i = 8, j=0;i < 12 && j<4;i++,j++) {
+		nodes2[j].val = i;
+		nodes2[j].next = NULL;
+		insert_head(&head2,&nodes2[j]);
+	}
+	reverse(&head2);
+	dump(&head2);
+
+	struct list_head new_head = {NULL};
+	merge_sorted_list(&new_head,&head1,&head2);
+	dump(&new_head);
 	return 0;
 }
