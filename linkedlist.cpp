@@ -58,11 +58,37 @@ void reverse(struct list_head *head) {
 }
 
 bool is_cyclic(struct list_head *head) {
+	struct list_node *fast = head->head;
+	struct list_node *slow = head->head;
 
+	while(fast != NULL && fast->next !=NULL) {
+		fast = fast->next->next;
+		slow = slow->next;
+		if(fast == slow) {
+			return true;
+		}
+	}
+	return false;
 }
 
 void del_backwards(struct list_head  *head, int n) {
+	struct list_node *first = head->head;
+	struct list_node *second = head->head;
 
+	while(n--!=0) {
+		first = first->next;
+	}
+
+	if(!first)
+		return;
+
+	while(first->next != NULL) {
+		second = second->next;
+		first = first->next;
+	}
+
+	printf("before del: %d\n", second->val);
+	second->next = second->next->next;
 }
 
 void merge_sorted_list(struct list_head *h1, struct list_head *h2) {
@@ -124,14 +150,19 @@ int main(int argc, char** argv) {
 	struct list_node *middle = find_middle(&head);
 	printf("middle=%d\n",middle->val);
 	
-	
-	
+
 	del_head(&head);
 	dump(&head);
-	
+
 	printf("reverse: ");
 	reverse(&head);
 	dump(&head);
-	
+
+	//insert_head(&head,&nodes[5]);
+	printf("is cylic: %d\n",is_cyclic(&head));
+
+	del_backwards(&head,3);
+	dump(&head);
+
 	return 0;
 }
