@@ -71,6 +71,31 @@ bool is_cyclic(struct list_head *head) {
 	return false;
 }
 
+struct list_node *the_cylic_entrance(struct list_head *head) {
+	struct list_node *fast = head->head;
+	struct list_node *slow = head->head;
+	struct list_node *tmp_head = head->head;
+	struct list_node *meet;
+
+	while(fast != NULL && fast->next !=NULL) {
+		fast = fast->next->next;
+		slow = slow->next;
+		if(fast == slow) {
+			meet = slow;
+			break;
+		}
+	}
+
+	while(tmp_head != NULL && tmp_head->next != NULL) {
+		if(tmp_head == meet) {
+			return meet;
+		}
+		tmp_head = tmp_head->next;
+		meet = meet->next;
+	}
+	return NULL;
+}
+
 void del_backwards(struct list_head  *head, int n) {
 	struct list_node *first = head->head;
 	struct list_node *second = head->head;
@@ -179,9 +204,12 @@ int main(int argc, char** argv) {
 	reverse(&head);
 	dump(&head);
 
-	//insert_head(&head,&nodes[5]);
+	insert_head(&head,&nodes[5]);
 	printf("is cylic: %d\n",is_cyclic(&head));
+	struct list_node *en = the_cylic_entrance(&head);
+	printf("loop entrance is: %d\n",en->val);
 
+#if 0
 	del_backwards(&head,3);
 	dump(&head);
 
@@ -210,5 +238,6 @@ int main(int argc, char** argv) {
 	struct list_head new_head = {NULL};
 	merge_sorted_list(&new_head,&head1,&head2);
 	dump(&new_head);
+#endif
 	return 0;
 }
