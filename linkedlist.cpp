@@ -158,7 +158,7 @@ struct list_node *find_middle(struct list_head *head) {
 
 	return slow;
 }
-
+/*
 void dump(struct list_head *head) {
 	struct list_node *tmp = head->head;
 	while(tmp) {
@@ -241,3 +241,4 @@ int main(int argc, char** argv) {
 #endif
 	return 0;
 }
+*/
