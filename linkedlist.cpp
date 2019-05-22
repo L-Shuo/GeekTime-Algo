@@ -92,7 +92,29 @@ void del_backwards(struct list_head  *head, int n) {
 }
 
 void merge_sorted_list(struct list_head *new_head, struct list_head *h1, struct list_head *h2) {
+	struct list_node dummy = {0};
+	new_head->head = &dummy;
 
+	struct list_node *l1 = h1->head;
+	struct list_node *l2 = h2->head;
+	struct list_node *temp = new_head->head;
+
+	while(l1 && l2) {
+		if(l1->val < l2->val) {
+			temp->next = l1;
+			l1 = l1->next;
+		} else {
+			temp->next = l2;
+			l2 = l2->next;
+		}
+		temp = temp->next;
+	}
+	if(l1) {
+		temp->next = l1;
+	} else {
+		temp->next = l2;
+	}
+	new_head->head = new_head->head->next;
 }
 
 struct list_node *find_middle(struct list_head *head) {
@@ -149,7 +171,6 @@ int main(int argc, char** argv) {
 	
 	struct list_node *middle = find_middle(&head);
 	printf("middle=%d\n",middle->val);
-	
 
 	del_head(&head);
 	dump(&head);
