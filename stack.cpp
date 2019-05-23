@@ -120,7 +120,7 @@ private:
 	int size;
 	int top;
 };
-
+#if 0 
 int main() {
 	Stack *stack = new Stack(20);
 	stack->push('1');
@@ -149,3 +149,4 @@ int main() {
 	string match3="[(])";
 	stack->isMatched(match3,stack);
 }
+#endif

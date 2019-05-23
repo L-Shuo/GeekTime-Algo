@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "debug.h"
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 using namespace std;
@@ -58,7 +59,8 @@ void dump(struct Array *array) {
 	}
 	printf("used:%d\n",array->used);
 }
-/*
+
+#if STACK_MAIN
 int main(int argc, char** argv) {
 	
 	struct Array m_array = { 10,0,NULL};
@@ -79,4 +81,5 @@ int main(int argc, char** argv) {
 	printf("search 1:  %d\n",search(&m_array,1));
 	printf("search 10: %d\n",search(&m_array,10));
 	return 0;
-}*/
+}
+#endif
