@@ -15,7 +15,7 @@ public:
 	~ArrayQueue() {
 		delete[] m_array;
 	}
-	
+
 	bool enqueue(int elem) {
 		//if(tail == capacity) {
 		//	cout << "full!" << endl;
@@ -39,23 +39,58 @@ public:
 		tail++;
 		return true;
 	}
-	
-	int dequeue() {
+
+	bool dequeue(int &elem) {
 		if(head == tail) {
 			cout << "no elem!" << endl;
-			return -1;
+			return false;
 		}
-		int temp =  m_array[head];
+		elem =  m_array[head];
 		head++;
-		cout << "dequeue: " << temp << endl;
-		return temp;
+		cout << "dequeue: " << elem << endl;
 	}
-	
+
+	void create_loop_queue(int size) {
+		loop_array = new int[size];
+		loop_head = 0;
+		loop_tail = 0;
+		loop_capacity = size;
+	}
+
+	void destroy_loop_queue() {
+		delete[] loop_array;
+	}
+
+	bool loop_enqueue(int elem) {
+		if((loop_tail + 1) % loop_capacity == loop_head) {
+			cout << "loop queue is full!" << endl;
+			return false;
+		}
+		loop_array[loop_tail] = elem;
+		loop_tail = (loop_tail + 1) % loop_capacity;
+		return true;
+	}
+
+	bool loop_dequeue(int &elem) {
+		if(loop_head == loop_tail) {
+			cout << "loop queue is empty!" << endl;
+			return false;
+		}
+		elem = loop_array[loop_head];
+		loop_head = (loop_head + 1) % loop_capacity;
+		return true;
+	}
+
 private:
 	int *m_array;
 	int head;
 	int tail;
 	int capacity;
+
+	int *loop_array;
+	int loop_head;
+	int loop_tail;
+	int loop_capacity;
 };
 
 #if ARRAY_QUEUE
@@ -67,15 +102,27 @@ int main() {
 	aq.enqueue(4);
 	aq.enqueue(5);
 	aq.enqueue(6);
-	
-	aq.dequeue();
-	aq.dequeue();
-	aq.dequeue();
-	aq.dequeue();
-	aq.dequeue();
-	aq.dequeue();
-	
+
+	int devalue = 0;
+	aq.dequeue(devalue);
+	aq.dequeue(devalue);
+	aq.dequeue(devalue);
+	aq.dequeue(devalue);
+	aq.dequeue(devalue);
+	aq.dequeue(devalue);
+
 	aq.enqueue(5);
-	aq.dequeue();
+	aq.dequeue(devalue);
+
+	aq.create_loop_queue(6);
+	aq.loop_enqueue(1);
+	aq.loop_enqueue(2);
+	//aq.loop_enqueue(3);
+	aq.loop_dequeue(devalue);
+	cout << "loop:" << devalue << endl;
+	aq.loop_dequeue(devalue);
+	cout << "loop:" << devalue << endl;
+	aq.loop_dequeue(devalue);
+	cout << "loop:" << devalue << endl;
 }
 #endif
