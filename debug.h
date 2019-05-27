@@ -4,5 +4,6 @@
 #define ARRAY_QUEUE 0
 #define LINKED_LIST 0
 #define STACK_MAIN 0
-#define RECURSION 1
+#define RECURSION 0
+#define SORTS 1
 #endif
