@@ -37,7 +37,19 @@ void insert_sort(int a[],int size) {
 }
 
 void select_sort(int a[], int size) {
-	
+	int min;
+	for(int i=0;i<size;i++) {
+		int min_pos = i;
+		for(int j=i+1;j<size;j++) {
+			if(a[j] < a[min_pos]) {
+				min_pos = j;  //find the min pos
+			}
+		}
+		//swap them;
+		min = a[min_pos];
+		a[min_pos] = a[i];
+		a[i] = min;
+	}
 }
 
 void dump_array(int a[],int size) {
@@ -54,7 +66,7 @@ void dump_array(int a[],int size) {
 int main() {
 	int size = 6;
 	printf("bubble sorts: ");
-	int a[size] = {4,5,6,2,3,1};
+	int a[size] = {4,5,1,2,3,6};
 	bubble_sort(a,size);
 	dump_array(a,size);
 	
@@ -62,6 +74,11 @@ int main() {
 	int b[size] = {4,5,6,3,2,1};
 	insert_sort(b,size);
 	dump_array(b,size);
+	
+	printf("selection sort: ");
+	int c[size] = {4,8,6,1,2,3};
+	select_sort(c,size);
+	dump_array(c,size);
 	return 0;
 }
 #endif
