@@ -52,6 +52,47 @@ void select_sort(int a[], int size) {
 	}
 }
 
+
+//formula: merge_sort(p,r) = merge(merge_sort(p,q),merge_sort(q+1,r);
+//termination: p>=r
+void merge(int a[],int p,int q,int r) {
+	//merge two sorted array.
+	int *temp = (int *)malloc((r-p+1) * sizeof(int));
+	int i,j,k;
+	if(!temp)
+		return;
+	for(i=p,j=q+1,k=0;i<=q&&j<=r;) {
+		if(a[i] <= a[j])
+			temp[k++] = a[i++];
+		else
+			temp[k++] = a[j++];
+	}
+	
+	if(i == q+1) { //something left
+		for(;j<=r;) {
+			temp[k++] = a[j++];
+		}
+	} else {
+		for(;i<=q;) {
+			temp[k++] = a[i++];
+		}
+	}
+	memcpy(a+p,temp,(r-p+1) * sizeof(int));
+	free(temp);
+}
+
+void __merge_sort(int a[],int p,int r) {
+	if (p>=r)
+		return;
+	int q = (p+r)/2;
+	__merge_sort(a,p,q);
+	__merge_sort(a,q+1,r);
+	merge(a,p,q,r);
+}
+void merge_sort(int a[],int size) {
+	__merge_sort(a, 0, size-1);
+}
+
 void dump_array(int a[],int size) {
 	if(size < 0) {
 		return;
@@ -79,6 +120,11 @@ int main() {
 	int c[size] = {4,8,6,1,2,3};
 	select_sort(c,size);
 	dump_array(c,size);
+	
+	printf("merge sort: ");
+	int d[size] = {4,8,6,1,1,3};
+	merge_sort(d,size);
+	dump_array(d,size);
 	return 0;
 }
 #endif
