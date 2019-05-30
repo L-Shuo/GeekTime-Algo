@@ -93,6 +93,37 @@ void merge_sort(int a[],int size) {
 	__merge_sort(a, 0, size-1);
 }
 
+//formula: quick_sort=quick_sort(p...q-1)+quick_sort(q+1,r)
+//termination: p>=r
+int partition(int a[], int p, int r) {
+	int i=p;
+	int temp;
+	int pivot = a[r];
+	for(int j=p;j<r;j++) {
+		if(a[j] < pivot) {
+			temp = a[i];
+			a[i] = a[j];
+			a[j] = temp;
+			i++;
+		}
+	}
+	temp = a[i];
+	a[i] = a[r];
+	a[r] = temp;
+	return i;
+}
+
+void __quick_sort(int a[],int p,int r) {
+	if(p >=r )
+		return;
+	int q = partition(a,p,r);
+	__quick_sort(a,p,q-1);
+	__quick_sort(a,q+1,r);
+}
+void quick_sort(int a[],int size) {
+	__quick_sort(a,0,size-1);
+}
+
 void dump_array(int a[],int size) {
 	if(size < 0) {
 		return;
@@ -125,6 +156,11 @@ int main() {
 	int d[size] = {4,8,6,1,1,3};
 	merge_sort(d,size);
 	dump_array(d,size);
+	
+	printf("quick sort: ");
+	int e[size] = {4,8,6,1,1,3};
+	quick_sort(e,size);
+	dump_array(e,size);
 	return 0;
 }
 #endif
