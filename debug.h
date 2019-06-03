@@ -5,5 +5,6 @@
 #define LINKED_LIST 0
 #define STACK_MAIN 0
 #define RECURSION 0
-#define SORTS 1
+#define SORTS 0
+#define BINARY_SEARCH 1
 #endif
