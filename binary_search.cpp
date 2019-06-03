@@ -7,7 +7,7 @@ int resursion_bsearch(int a[],int left,int right,int target) {
 	if(left > right) {
 		return -1;
 	}
-	int mid = right + (right+left) >> 1;
+	int mid = left + ((right-left) >> 1);
 	
 	if(target == a[mid]) {
 		return mid;
@@ -28,7 +28,7 @@ int simple_bsearch(int a[],int size,int target) {
 
 	while(left <= right) {
 		//int mid = (right+left)/2;  if right and left is too big, may overflow
-		int mid = right + (right+left) >> 1;
+		int mid = left + ((right-left) >> 1);
 		if(target == a[mid]) {
 			return mid;
 		}

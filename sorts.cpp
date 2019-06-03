@@ -1,4 +1,5 @@
 #include <iostream>
+#include <malloc.h>
 #include "debug.h"
 
 void bubble_sort(int a[],int size) {
