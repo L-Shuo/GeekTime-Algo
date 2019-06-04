@@ -1,7 +1,35 @@
 #include <iostream>
+#include <stdlib.h>
+#include <math.h>
 #include "debug.h"
 
+#define E 0.00001
+double sqrt(double num)
+{
+	double down = 0;
+	double up = num;
+    double mid = 0.0;
+	while(1)
+	{
+	    mid = (down + up)/2;
+        if(fabs(mid*mid - num) <= E)
+		{
+			return mid;
+		}
 
+		if ((mid*mid - num) > E)
+		{
+			up = mid;
+		}
+		else
+		{
+			down = mid;
+		}
+ 	}
+
+	return 0;
+}
+ 
 //formula:
 int resursion_bsearch(int a[],int left,int right,int target) {
 	if(left > right) {
@@ -50,6 +78,7 @@ int main()
 
 	printf("find %d: pos=%d \n",target,simple_bsearch(a,size,2));
 	printf("find %d: pos=%d \n",target,rbsearch(a,size,8));
+	printf("sqrt 6: %lf\n",sqrt(6));
 	return 0;
 }
 #endif
