@@ -6,5 +6,6 @@
 #define STACK_MAIN 0
 #define RECURSION 0
 #define SORTS 0
-#define BINARY_SEARCH 1
+#define BINARY_SEARCH 0
+#define HASH_TABLE 1
 #endif
