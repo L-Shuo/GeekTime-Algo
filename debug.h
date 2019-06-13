@@ -7,5 +7,6 @@
 #define RECURSION 0
 #define SORTS 0
 #define BINARY_SEARCH 0
-#define HASH_TABLE 1
+#define HASH_TABLE 0
+#define BINARY_TREE 1
 #endif
