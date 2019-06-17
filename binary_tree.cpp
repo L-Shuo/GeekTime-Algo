@@ -59,6 +59,8 @@ void create_binary_tree(Tree **root) {
 }
 
 void levelOrder(Tree *root) {
+	if(root == NULL)
+		return;
 	queue<TreeNode*> q;
 	//TreeNode *node = root;
 	q.push(root);
@@ -125,5 +127,6 @@ int main() {
 	postOrder(root);
 	printf("\n levelOrder:\n");
 	levelOrder(root);
+	destroyTree(root);
 }
 #endif
