@@ -3,7 +3,9 @@
 #include <time.h>
 #include <string.h>
 #include <stdlib.h>
+#include <queue>
 
+using namespace std;
 #define MAX_TREE_NODES (1<<8)
 #define SIZE  3
 typedef struct _node {
@@ -56,8 +58,19 @@ void create_binary_tree(Tree **root) {
 	return ;
 }
 
-void destroy_tree(Tree *root) {
-	
+void levelOrder(Tree *root) {
+	queue<TreeNode*> q;
+	//TreeNode *node = root;
+	q.push(root);
+	while(!q.empty()) {
+		TreeNode *node = q.front();
+		printf(" %d",node->data);
+		if(node->lf)
+			q.push(node->lf);
+		if(node->rt)
+			q.push(node->rt);
+		q.pop();
+	} 
 }
 
 void preOrder(Tree *root) {
@@ -110,5 +123,7 @@ int main() {
 	inOrder(root);
 	printf("\n postOrder:\n");
 	postOrder(root);
+	printf("\n levelOrder:\n");
+	levelOrder(root);
 }
 #endif
