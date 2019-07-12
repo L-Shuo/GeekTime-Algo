@@ -9,5 +9,7 @@
 #define BINARY_SEARCH 0
 #define HASH_TABLE 0
 #define BINARY_TREE 0
-#define BINARY_SEARCH_TREE 1
+#define BINARY_SEARCH_TREE 0
+#define RB_TREE 0
+#define PPP     1
 #endif
